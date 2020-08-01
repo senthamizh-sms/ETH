@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JLL Office Property Clock</title>
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+.green{
+color:green;
+}
+.yellow{
+color:yellow;
+}
+.red{
+color:red;
+}
+.ulcls{
+float: left;
+    width: 400px;
+    font-size: 17px;
+}
+
+</style>
+<script src="js/modernizr.js"></script>
+</head>	
+
+<body onload="initiate()">
+<label>Buy value</label><input type="text" id="MinValue"/>
+<label>Sell value</label><input type="text" id="MaxValue"/>
+<div>
+<div id="TradeDetails" style="font-size: 88px;float: left;">
+
+</div>
+<div>
+<ul id="history" class="ulcls">
+</ul>
+</div>
+<div>
+<ul id="books" class="ulcls">
+</ul>
+</div>
+</div>
+<!--<div><iframe src="https://www.google.com/search?q=usd+to+inr&rlz=1C1SQJL_enIN792IN792&oq=usd+to+inr+&aqs=chrome..69i57j0j69i59j0l2j69i60l3.4013j1j7&sourceid=chrome&ie=UTF-8" width="50%"></div>-->
+<div id='testdiv' style='visibility:hidden;width:180px;'></div>
+<script type="text/javascript">
+  Modernizr.load({
+	test: Modernizr.svg,
+	yep: ['js/jquery-1.10.2.min.js'],
+	nope: ['js/jquery-1.10.2.min.js']
+  });
+</script>
+<script type="text/javascript">
+var alertcontroller=true;
+var maxalertcontroller=true;
+var buycls="";
+var sellcls="";
+var buyprice=0;
+function checktrade(){
+
+
+ $.ajax({       
+       url: "https://www.zebapi.com/pro/v1/market/BTC-INR/ticker",   
+       type: "GET", 
+       contentType: "application/json;odata=verbose",
+       headers: { 
+          "Accept": "application/json;odata=verbose",          
+       },   
+       success: function(data,status){
+      //  console.log("bid value: "+parseInt(data.buy)+" Min Value: "+parseInt($("#MinValue").val())+" Max value:"+parseInt($("#MaxValue").val()))
+       buyprice=parseInt(data.buy);
+if(parseInt(data.buy) < parseInt($("#MinValue").val()))
+{
+	
+	buycls="yellow";
+	if(alertcontroller === true){
+		alert("important notice: low value reached !!!!");
+		//console.log(parseInt(data.buy))
+		//$("#MinValue").val(parseInt(data.buy)-10000);
+		alertcontroller=false;
+		console.log(alertcontroller);
+			setwait(1);
+		}
+}else{
+	buycls="";
+}
+if(parseInt(data.sell) > parseInt($("#MaxValue").val())){
+	if(maxalertcontroller === true){
+	alert("important notice: max value reached !!!!");
+		maxalertcontroller=false;	
+			setwait(2);
+		}
+
+	sellcls="green";
+}else{
+	sellcls="";
+}
+//console.log(cls);
+var buy=numberWithCommas(data.buy);
+var sell=numberWithCommas(data.sell)
+	 var t="<span class='"+buycls+"'>BUY="+buy+"</span><br/>"
+            +"<span class='"+sellcls+"'>SELL="+sell+"</span><br/>"
+			    +"<span '>24-Hours High="+numberWithCommas(data["24hoursHigh"])+"</span><br/>"
+				 +"<span>24-Hours Low="+numberWithCommas(data["24hoursLow"])+"</span><br/>"
+			 +"<span>Pricechange="+data.pricechange+"</span><br/>"
+			+"<span>Volume="+data.volume+"</span><br/>";
+        $("#TradeDetails").empty();
+    $("#TradeDetails").append(t);
+$(document).attr("title",buy+" | "+sell)
+},
+
+    });
+}
+function getbooks(){
+
+
+ $.ajax({       
+       url: "https://www.zebapi.com/pro/v1/market/BTC-INR/book",   
+       type: "GET", 
+       contentType: "application/json;odata=verbose",
+       headers: { 
+          "Accept": "application/json;odata=verbose",          
+       },   
+       success: function(data,status){
+		  // console.log(data);
+      //  console.log("bid value: "+parseInt(data.buy)+" Min Value: "+parseInt($("#MinValue").val())+" Max value:"+parseInt($("#MaxValue").val()))
+  var htmlbooks="";     
+for(var i=0;i<data.asks.length;i++){
+	htmlbooks+="<li class='red'>price: "+numberWithCommas(data.asks[i].price)+" | amount: "+convertednumberWithCommas(data.asks[i].amount)+"</li>";
+}
+for(var j=0;j<data.bids.length;j++){
+	htmlbooks+="<li class='green'>price: "+numberWithCommas(data.bids[j].price)+" | amount: "+numberWithCommas(data.bids[j].amount)+"</li>";
+}
+
+        $("#books").empty();
+    $("#books").append(htmlbooks);
+
+},
+
+    });
+}
+function gethistory(){
+
+
+ $.ajax({       
+       url: "https://www.zebapi.com/pro/v1/market/BTC-INR/trades",   
+       type: "GET", 
+       contentType: "application/json;odata=verbose",
+       headers: { 
+          "Accept": "application/json;odata=verbose",          
+       },   
+       success: function(data,status){
+		//console.log(data) 
+      //  console.log("bid value: "+parseInt(data.buy)+" Min Value: "+parseInt($("#MinValue").val())+" Max value:"+parseInt($("#MaxValue").val()))
+  var htmlbooks="";     
+for(var i=0;i<data.length;i++){
+	if(parseInt(data[i].fill_flags) ===  1){
+	htmlbooks+="<li class='red'>price: "+numberWithCommas(data[i].fill_price)+" | amount: "+data[i].fill_qty+" | "+gettime(data[i].lastModifiedDate)+"</li>";
+	}else{
+		htmlbooks+="<li class='green'>price: "+numberWithCommas(data[i].fill_price)+" | amount: "+data[i].fill_qty+" | "+gettime(data[i].lastModifiedDate)+"</li>";
+	}
+}
+
+
+        $("#history").empty();
+    $("#history").append(htmlbooks);
+
+},
+
+    });
+}
+function setwait(param){
+	setTimeout(function(){
+		if(param == 1){
+		alertcontroller=true;
+		}else{
+			maxalertcontroller=true;
+		}
+	},30000)
+}
+
+function initiate(){
+var destroyer=setInterval(checktrade,1000);
+var booksdestroyer=setInterval(getbooks,1000);
+var historydestroyer=setInterval(gethistory,1000);
+}
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function convertednumberWithCommas(x) {
+	//console.log(x)
+	x="0."+x;
+	x=(parseFloat(x)*buyprice).toString();
+
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function gettime(y){
+	var rettext="";
+	var nowtime=new Date();
+	var diffdate=new Date(y);
+var diff=(nowtime.getTime() - diffdate.getTime());
+
+ if(diff <= 60000){
+	rettext= parseInt((diff/1000)).toString() +" s";
+}else if(diff <= 3600000){
+	rettext= parseInt((diff/60000)).toString() +" m";
+}else if(diff <= 216000000){
+rettext= parseInt((diff/3600000)).toString() +" h";
+}
+return rettext;
+}
+</script>
+
+</body>
+</html>

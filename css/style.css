@@ -1,0 +1,100 @@
+/* Reset css */
+/* http://meyerweb.com/eric/tools/css/reset/    v2.0 | 20110126   License: none (public domain)	*/ 
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {margin: 0;padding: 0;	 border: 0; font-size: 100%;  font: inherit;  vertical-align: baseline;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {  display: block;}
+body {line-height:1;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after, q:before, q:after {content: '';   content: none;}
+table {border-collapse: collapse;  border-spacing: 0;}
+
+/*GMP CSS*/
+.main-chart-container {  position: relative; padding-bottom:35px;  margin:0 auto;background-color: white;}
+.main-chart-container .fallback {  position: absolute;  top: 200px;  left: 350px;  width: 300px;  background-color: white;  padding: 20px;  font-size: 16px; line-height: 22px;  border: 1px solid #ddd;  text-align: center;}
+.title-box {  color: #000;  font-size: 20px;  font-weight: bold;  padding-left: 20px;	 margin-top: 25px;  margin-bottom: 25px;} 
+/* menu */
+.main-chart-container .menu div.item {  display: none;  /*padding: 20px;*/   /*text-align: center;*/   /*padding: 15px 2px;*/  color: #7f7f7f;  line-height: 20px;   font-size: 14px;    border: 1px solid #ddd;	   border-top: none;  border-right: none;  cursor: pointer;}
+.main-chart-container .menu div.item > div {   width: 200px;   height: 64px; }
+#regional-trends .menu div.item div p {	  padding: 3px;}
+.main-chart-container .menu div.item:first-child {   border-left: none;  -moz-border-radius: 5px 0 0 0;	  -webkit-border-radius: 5px 0 0 0;	  -khtml-border-radius: 5px 0 0 0;}
+.main-chart-container .menu div.item:last-child {   -moz-border-radius: 0 5px 0 0;   -webkit-border-radius: 0 5px 0 0;	   -khtml-border-radius: 0 5px 0 0;	  position: absolute;	   right: 0px;	   } 
+.main-chart-container .menu div.item.selected {	  background-color: #F2F2F2;   -moz-box-shadow: inset 0 0 4px #aaa;	  -webkit-box-shadow: inset 0 0 4px #aaa;box-shadow: inset 0 0 4px #aaa;  font-weight: bold;}
+/* submenu */	 
+.submenu { width:435px; margin:0 auto;}
+.main-chart-container .submenu {   -webkit-touch-callout: none;  -webkit-user-select: none;  -khtml-user-select: none;	  -moz-user-select: none;
+-ms-user-select: none;   user-select: none; }
+.main-chart-container .submenu div.item {  display: inline-block;   height: 16px;   line-height: 16px;   text-align: center;   font-size: 14px;	   background-color: white;   padding: 8px 14px;	    border: 1px solid #2E75C1;color: #2E75C1;  cursor: pointer;   -moz-border-radius: 5px;   -webkit-border-radius: 5px; -khtml-border-radius: 5px;   border-radius: 5px; margin:0 5px;}
+.main-chart-container .submenu div.item.selected, .main-chart-container .submenu div.item:hover {   background-color: #2E75C1;  color: white;}
+.main-chart-container .submenu div.item.selected {   -moz-box-shadow: inset 1px 1px #0E55A1;   -webkit-box-shadow: inset 1px 1px #0E55A1;   box-shadow: inset 1px 1px #0E55A1;}
+/* tooltip */
+.tooltip {  background-color: white;  width: 350px;	  padding: 20px;   font-size: 14px;	   border: 1px solid #ddd;  -pie-box-shadow: 0px 0px 12px 3px #B2B2B2;  -moz-box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.3);  -webkit-box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.3);  box-shadow: 0px 0px 12px 3px rgba(0, 0, 0, 0.3);border-style: none;  border-color: transparent;  background-color: #FFFFFF;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;  -khtml-border-radius: 5px;  border-radius: 5px;  pointer-events: none;}
+
+/* style Sheet */
+body{font-family:"Helvetica Neue",Helvetica,sans-serif;margin:0 auto;font-size:14px;}
+.no-select{-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+.group:after{content:"";display:table;clear:both}
+#office-clock .chart-container,#office-clock,#office-clock svg{position:relative;top:0; width:700px; min-height:750px; }
+.exit-city-view{display: none !important; position: absolute; top: 595px; left: 610px; font-size: 14px;text-decoration: none; color: rgb(46,117,193);cursor: pointer;/* font-weight: bold; */ background: #666; padding: 11px 15px; color: #fff;}
+#office-clock .menu div.item{text-align:center;padding:15px 2px;height:20px;width:246px}
+#office-clock .submenu div.item{padding:8px 10px}
+#office-clock .submenus{margin:0 auto -65px; }
+#office-clock .submenus .submenu{right:0}
+#office-clock .history-key{width: 530px; margin: 0 auto;}
+#office-clock .history-key{height:50px;font-size:14px;right:0}
+#office-clock .history-key svg{height:100px}
+#office-clock .history-key svg rect{fill:none;stroke:#BC141A;display:none}
+#office-clock svg .clock circle{fill:none;stroke:#2E75C1;stroke-width:0.5px}#office-clock svg .clock line{stroke:#2E75C1;stroke-width:0.5px}
+#office-clock svg .clock .quadrant-background,.quadrant-label{fill:#f8f8f8;cursor:pointer}
+#office-clock div.quadrant-label{position:absolute;font-size:15px;color:#ddd;pointer-events:none}
+#office-clock div.quadrant-label.showcase{color:#2E75C1}
+#office-clock .about{position:absolute; top:30px; left:20px;}
+#office-clock .about h1{font-size:18px;font-weight:bold;padding-bottom:6px}
+#office-clock svg .clock .points circle{stroke-width:0px !important;}
+#office-clock .label-group{width:320px;}#office-clock .label-group.right{text-align:right; line-height:18px;}
+#office-clock .label-group.left{text-align:left; line-height:18px;}
+#office-clock .label-group span{ cursor:pointer; color:#2E75C1;-webkit-touch-callout:none; -webkit-user-select:none;-khtml-user-select:none; -moz-user-select:none; -ms-user-select:none;user-select:none}
+#office-clock .label-group span:hover,#office-clock .label-group span.selected{color:#BC141A !important}
+#office-clock svg g.connectors .connector{}
+#office-clock svg g.connectors path{stroke:#bbb}
+#office-clock .tooltip{width:60px !important;text-align:center}
+#office-clock .chart-container svg g.clock circle.shadow {  filter: url(#dropshadow);  fill: #0E55A1;  opacity: 0.3;}/*page css*/
+.container-clock {margin:0 auto 0px;}
+p {padding:20px;}
+p a {color:#006ED3; text-decoration:none;}
+
+/* Clock Statistics */
+.wrapper-box {padding:30px 20px 20px; border:1px solid #ccc; width:700px; height:935px; margin:0 auto; overflow:hidden;}
+.clk_stat{padding:20px 20px 20px 30px; width:634px; margin:0px auto; height:115px; background:#f1f1f1;  margin-bottom:-28px;}
+.slider_box{float:left; margin-right:6px;background:#ffffff;width:425px;border:1px solid #afafaf;padding-bottom: 10px;}
+.clk_stat p{color:#000000 ; font:normal 12px arial,HElavitica,Sans serif; padding-top:10px;}
+.clk_stat h1{font-family:arial,verdana, Helvitica; font-size:14px;}
+.clk_stat h3{font-family:arial,verdana, Helvitica; font-size:11px; padding-left:13px; margin-top:0px;}
+.rent_dol, .rent_per, .vacancy_per{ width:354px; height:29px; margin-top:5px;}
+.rent_box{padding-top:3px;}
+.clk_stat1{background-color:#ffffff; float:left;}
+.rent_dol1{background:url('') no-repeat top left; width:386px;}
+.rent_per1{background:url('') no-repeat top left; width:386px;}
+.vacancy_per1{background:url('') no-repeat top left; width:386px;}
+.rent_box ul{margin-left:28px;}
+.rent_box ul li{float:left; display:block; height:22px; padding-right:6px; font-size:10px;}
+.rent_box ul li.stat_text{padding-top:7px; width:67px; text-align:right;}
+.rent_box ul li.stat_text1{padding-top:7px; width:55px;}
+
+.rent_box ul li.stat_bar{padding-top:6px;}
+.scroll_box{ width:214px; height:22px; position:relative;}
+
+.test2{font-size:15px;}
+.fotbold_txt{float:left;}
+.txt3{font-size:11px; padding-top:20px; padding-left:15px; padding-bottom:2px;}
+.fotnormal_txt{ clear:both;width:420px;}
+.Headertxt {padding:0 0 15px;}
+.top_link {width:742px; margin:0 auto;}
+.top_link p {padding:20px 0; margin:0;}
+
+/*senthamizh */
+.fxwidth
+{
+width:185px !important;
+}
+/**/
